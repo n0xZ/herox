@@ -1,10 +1,14 @@
-import type { LoaderArgs } from '@remix-run/node'
-import { NavLink, Outlet } from '@remix-run/react'
+import type { ActionArgs, LoaderArgs } from '@remix-run/node'
+import { Form, NavLink, Outlet } from '@remix-run/react'
 import type { ReactNode } from 'react'
-import { requireUserId } from '~/utils/session.server'
+import { inputFromForm } from 'remix-domains'
+import { logout, requireUserId } from '~/utils/session.server'
 
-export const loader = async({request}:LoaderArgs) =>{
-return requireUserId(request,"/private")
+export const action = async ({ request }: ActionArgs) => {
+	return logout(request)
+}
+export const loader = async ({ request }: LoaderArgs) => {
+	return requireUserId(request, '/private')
 }
 const PrivateLayout = ({ children }: { children: ReactNode }) => {
 	return (
@@ -13,7 +17,7 @@ const PrivateLayout = ({ children }: { children: ReactNode }) => {
 				<nav className="container mx-auto font-bold navbar font-inter">
 					<aside className="flex-1">
 						<h1 className="text-xl normal-case btn btn-ghost">
-							<NavLink to="/characters/home">Home</NavLink>
+							<NavLink to="/private/">Home</NavLink>
 						</h1>
 					</aside>
 					<aside className="hidden space-x-4 navbar-end xl:flex">
@@ -33,10 +37,10 @@ const PrivateLayout = ({ children }: { children: ReactNode }) => {
 								</span>
 								<ul className="p-2 bg-base-100">
 									<li>
-										<NavLink to="/characters/view">Ver personajes</NavLink>
+										<NavLink to="/private/heroes">Ver personajes</NavLink>
 									</li>
 									<li>
-										<NavLink to="/characters/search">Buscar personajes</NavLink>
+										<NavLink to="/private/heroes/search">Buscar personajes</NavLink>
 									</li>
 								</ul>
 							</li>
@@ -65,10 +69,17 @@ const PrivateLayout = ({ children }: { children: ReactNode }) => {
 								className="p-2 mt-3 space-y-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 "
 							>
 								<li>
-									<NavLink to="/characters/view">Ver personajes</NavLink>
+									<NavLink to="/private/heroes">Ver personajes</NavLink>
 								</li>
 								<li>
-									<NavLink to="/characters/search ">Buscar personajes</NavLink>
+									<NavLink to="/private/heroes/search ">Buscar personajes</NavLink>
+								</li>
+								<li>
+									<Form>
+										<button type="submit" name="_logout" value="true">
+											Cerrar sesión
+										</button>
+									</Form>
 								</li>
 							</ul>
 						</div>
