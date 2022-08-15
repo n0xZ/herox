@@ -9,6 +9,7 @@ import {
 } from '@remix-run/react'
 
 import styles from '~/styles/app.css'
+
 export const meta: MetaFunction = () => ({
 	charset: 'utf-8',
 	title: 'New Remix App',
@@ -26,6 +27,7 @@ export default function App() {
 			</head>
 			<body>
 				<Outlet />
+
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />

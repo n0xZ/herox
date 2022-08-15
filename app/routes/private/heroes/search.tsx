@@ -1,7 +1,6 @@
-import React from 'react'
+import { Form } from '@remix-run/react'
+import type { Hero } from '~/types'
 
 export default function SearchHeroes() {
-  return (
-    <div>SearchHeroes</div>
-  )
+	return <Form method="get"></Form>
 }

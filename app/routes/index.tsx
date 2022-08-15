@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react'
+
 import HeroLandingImage from '../../public/hero-landing.png'
 export default function Landing() {
 	return (
@@ -18,7 +19,7 @@ export default function Landing() {
 						</h1>
 						<p className="py-6 text-gray-500">
 							En Herox, puedes elegir y añadir distíntos personajes a tu equipo, ya sea
-							del mundo Marvel  y DC.
+							del mundo Marvel y DC.
 						</p>
 						<Link to="/login" className="btn btn-secondary">
 							Empezar ya
