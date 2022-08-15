@@ -1,6 +1,11 @@
+import type { LoaderArgs } from '@remix-run/node'
 import { NavLink, Outlet } from '@remix-run/react'
 import type { ReactNode } from 'react'
+import { requireUserId } from '~/utils/session.server'
 
+export const loader = async({request}:LoaderArgs) =>{
+return requireUserId(request,"/private")
+}
 const PrivateLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>
@@ -48,9 +53,9 @@ const PrivateLayout = ({ children }: { children: ReactNode }) => {
 									stroke="currentColor"
 								>
 									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
 										d="M4 6h16M4 12h16M4 18h7"
 									/>
 								</svg>
