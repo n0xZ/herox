@@ -1,6 +1,14 @@
 import type { ActionArgs } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Form, useActionData } from '@remix-run/react'
+import { Form, useActionData, useTransition } from '@remix-run/react'
+import { useEffect, useRef } from 'react'
+import {
+	makeDomainFunction,
+	errorMessagesForSchema,
+	inputFromForm,
+} from 'remix-domains'
+import { v4 } from 'uuid'
+import { z } from 'zod'
 import { createUserSession } from '~/utils/session.server'
 
 type Credentials = {
@@ -14,14 +22,25 @@ type Field = {
 	name: string
 	errors?: string
 }
+export const signInValidator = z.object({
+	username: z.string().min(5, { message: 'Campo requerido' }),
+	password: z.string().min(5, { message: 'Campo requerido' }),
+})
 
+const LoginDomainFunction = makeDomainFunction(signInValidator)(
+	async (values) => {
+		return values
+	}
+)
 export const action = async ({ request }: ActionArgs) => {
-	const formData = Object.fromEntries(await request.formData()) as Credentials
-	const errors = { username: '', password: '' }
-	if (formData.username === '') errors.username = 'Campo requerido'
-	if (formData.password === '') errors.password = 'Campo requerido'
-	if (Object.keys(errors)) return errors
-	createUserSession(JSON.stringify(formData))
+	const result = await LoginDomainFunction(await inputFromForm(request))
+	if (result.success)  return createUserSession(v4())
+	const inputErrors = errorMessagesForSchema(result.inputErrors, signInValidator)
+	return json({
+		errors: result.errors,
+		username: inputErrors.username,
+		password: inputErrors.password,
+	})
 }
 
 export const FormField = ({ label, name, type, errors }: Field) => {
@@ -39,7 +58,14 @@ export const FormField = ({ label, name, type, errors }: Field) => {
 }
 
 export default function LoginPage() {
+	const formRef = useRef<HTMLFormElement | null>(null)
 	const actionData = useActionData<typeof action>()
+	const transition = useTransition()
+	const isSubmitting = transition.state === 'submitting'
+
+	useEffect(() => {
+		formRef.current?.reset()
+	}, [isSubmitting])
 	return (
 		<section>
 			<Form method="post">
@@ -47,13 +73,13 @@ export default function LoginPage() {
 					label="Nombre de usuario"
 					name="username"
 					type="text"
-					errors={actionData?.username}
+					errors={actionData?.username[0]}
 				/>
 				<FormField
 					label="Contraseña"
 					name="password"
 					type="text"
-					errors={actionData?.password}
+					errors={actionData?.password[0]}
 				/>
 				<button type="submit" className="btn btn-primary">
 					Iniciar sesión

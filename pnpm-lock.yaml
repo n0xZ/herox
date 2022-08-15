@@ -9,6 +9,7 @@ specifiers:
   '@remix-run/serve': ^1.6.8
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
+  '@types/uuid': ^8.3.4
   '@vercel/node': ^2.4.4
   autoprefixer: ^10.4.8
   concurrently: ^7.3.0
@@ -17,8 +18,11 @@ specifiers:
   postcss: ^8.4.16
   react: ^18.2.0
   react-dom: ^18.2.0
+  remix-domains: ^0.3.2
   tailwindcss: ^3.1.8
   typescript: ^4.7.4
+  uuid: ^8.3.2
+  zod: ^3.18.0
 
 dependencies:
   '@remix-run/cloudflare-pages': 1.6.8_biqbaboplfbrettd7655fr4n2y
@@ -27,6 +31,8 @@ dependencies:
   '@vercel/node': 2.5.7
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  remix-domains: 0.3.2_zod@3.18.0
+  zod: 3.18.0
 
 devDependencies:
   '@remix-run/dev': 1.6.8_cgxlqhaetfbjollwaaytbbpdmu
@@ -34,6 +40,7 @@ devDependencies:
   '@remix-run/serve': 1.6.8_biqbaboplfbrettd7655fr4n2y
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
+  '@types/uuid': 8.3.4
   autoprefixer: 10.4.8_postcss@8.4.16
   concurrently: 7.3.0
   daisyui: 2.22.0_25hquoklqeoqwmt7fwvvcyxm5e
@@ -41,6 +48,7 @@ devDependencies:
   postcss: 8.4.16
   tailwindcss: 3.1.8
   typescript: 4.7.4
+  uuid: 8.3.2
 
 packages:
 
@@ -1922,6 +1930,10 @@ packages:
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
+    dev: true
+
+  /@types/uuid/8.3.4:
+    resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.33.0_njno5y7ry2l2lcmiu4tywxkwnq:
@@ -6457,7 +6469,6 @@ packages:
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
-    dev: true
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -6669,6 +6680,15 @@ packages:
       mdast-util-to-hast: 11.3.0
       unified: 10.1.2
     dev: true
+
+  /remix-domains/0.3.2_zod@3.18.0:
+    resolution: {integrity: sha512-e/SvgweoZdItbagdijkCFyaCOc1rZJGaDEu68tBlFv5SAa0RjebFMn+Kj3KxwjmK57ltXJt20022EmnGV4meBQ==}
+    peerDependencies:
+      zod: ^3.17.3
+    dependencies:
+      qs: 6.10.3
+      zod: 3.18.0
+    dev: false
 
   /repeat-element/1.1.4:
     resolution: {integrity: sha512-LFiNfRcSu7KK3evMyYOuCzv3L10TW7yC1G2/+StMjK8Y6Vqd2MG7r/Qjw4ghtuCOjFvlnms/iMmLqpvW/ES/WQ==}
@@ -7628,6 +7648,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: true
+
   /uvu/0.5.6:
     resolution: {integrity: sha512-+g8ENReyr8YsOc6fv/NVJs2vFdHBnBNdfE49rshrTzDWOlUx4Gq7KOS2GD8eqhy2j+Ejq29+SbKH8yjkAqXqoA==}
     engines: {node: '>=8'}
@@ -7840,6 +7865,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod/3.18.0:
+    resolution: {integrity: sha512-gwTm8RfUCe8l9rDwN5r2A17DkAa8Ez4Yl4yXqc5VqeGaXaJahzYYXbTwvhroZi0SNBqTwh/bKm2N0mpCzuw4bA==}
+    dev: false
 
   /zwitch/2.0.2:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}

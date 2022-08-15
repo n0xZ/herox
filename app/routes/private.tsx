@@ -1,6 +1,11 @@
+import type { LoaderArgs } from '@remix-run/node'
 import { NavLink, Outlet } from '@remix-run/react'
 import type { ReactNode } from 'react'
+import { requireUserId } from '~/utils/session.server'
 
+export const loader = async({request}:LoaderArgs) =>{
+return requireUserId(request,"/private")
+}
 const PrivateLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>
