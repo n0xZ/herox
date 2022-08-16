@@ -6,10 +6,11 @@ export const getHeroes = async () => {
 	const heroes = (await res.json()) as Hero[]
 	return heroes
 }
-export const getHeroByPublisher = async (publisher: string) => {
+export const getHeroByPublisher = async (publisher?: string) => {
 	const heroes = await getHeroes()
 	const heroesByPublisher = heroes.filter(
-		(hero) => hero.biography.publisher === publisher
+		(hero) =>
+			hero.biography.publisher?.replace('', '-').toLowerCase() === publisher
 	)
 	return heroesByPublisher
 }

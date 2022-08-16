@@ -2,22 +2,11 @@ import type { LoaderArgs } from '@remix-run/node'
 import { useLoaderData, useParams } from '@remix-run/react'
 import { useEffect } from 'react'
 import { HeroListResult } from '~/components/hero/HeroResult'
+import { getHeroByPublisher } from '~/services/heroes.server'
 import type { Hero } from '~/types'
 
 export const loader = async ({ params }: LoaderArgs) => {
-	console.log(params.publisher)
-	const API_URL = process.env.API_URL!
-	const res = await fetch(API_URL)
-	const heroes = (await res.json()) as Hero[]
-	const filteredHeroes = heroes
-		.filter(
-			(hero) =>
-				hero.biography.publisher?.replace('', '-').toLowerCase() !==
-				params.publisher
-		)
-		.slice(0, 5)
-
-	return filteredHeroes
+	return getHeroByPublisher(params.publisher)
 }
 
 export default function PublisherContent() {
