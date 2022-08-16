@@ -70,24 +70,41 @@ export default function LoginPage() {
 		formRef.current?.reset()
 	}, [isSubmitting])
 	return (
-		<section>
-			<Form method="post">
-				<FormField
-					label="Nombre de usuario"
-					name="username"
-					type="text"
-					errors={actionData?.username[0]}
-				/>
-				<FormField
-					label="Contraseña"
-					name="password"
-					type="text"
-					errors={actionData?.password[0]}
-				/>
-				<button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-					{!isSubmitting ? 'Iniciar sesión' : 'Iniciando...'}
-				</button>
-			</Form>
+		<section className="min-h-screen hero bg-base-200">
+			<article className="flex-col hero-content lg:flex-row-reverse">
+				<div className="text-center lg:text-left">
+					<h1 className="text-4xl font-bold">
+						Busca tus heroes favoritos de Marvel y DC!
+					</h1>
+					<p className="py-6">
+						En herox, puedes encontrar a tus heroes favoritos del mundo de los comics.
+					</p>
+				</div>
+
+				<div className="flex-shrink-0 w-full max-w-sm shadow-2xl card bg-base-100">
+					<Form method="post" className="card-body">
+						<FormField
+							label="Nombre de usuario"
+							name="username"
+							type="text"
+							errors={actionData?.username[0]}
+						/>
+						<FormField
+							label="Contraseña"
+							name="password"
+							type="text"
+							errors={actionData?.password[0]}
+						/>
+						<button
+							type="submit"
+							className="btn btn-secondary "
+							disabled={isSubmitting}
+						>
+							{!isSubmitting ? 'Iniciar sesión' : 'Iniciando...'}
+						</button>
+					</Form>
+				</div>
+			</article>
 		</section>
 	)
 }
