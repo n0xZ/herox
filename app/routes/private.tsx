@@ -17,14 +17,14 @@ const PrivateLayout = ({ children }: { children: ReactNode }) => {
 				<nav className="container mx-auto font-bold navbar font-inter">
 					<aside className="flex-1">
 						<h1 className="text-xl normal-case btn btn-ghost">
-							<NavLink to="/private/">Home</NavLink>
+							<NavLink to="/private">Home</NavLink>
 						</h1>
 					</aside>
 					<aside className="hidden space-x-4 navbar-end xl:flex">
 						<ul className="p-0 space-x-3 menu menu-horizontal">
 							<li tabIndex={0}>
 								<span>
-									Personajes
+									Heroes
 									<svg
 										className="fill-current"
 										xmlns="http://www.w3.org/2000/svg"
@@ -37,10 +37,10 @@ const PrivateLayout = ({ children }: { children: ReactNode }) => {
 								</span>
 								<ul className="p-2 bg-base-100">
 									<li>
-										<NavLink to="/private/heroes">Ver personajes</NavLink>
+										<NavLink to="/private/heroes">Ver heroes</NavLink>
 									</li>
 									<li>
-										<NavLink to="/private/heroes/search">Buscar personajes</NavLink>
+										<NavLink to="/private/heroes/search">Buscar heroes</NavLink>
 									</li>
 								</ul>
 							</li>
@@ -69,10 +69,10 @@ const PrivateLayout = ({ children }: { children: ReactNode }) => {
 								className="p-2 mt-3 space-y-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 "
 							>
 								<li>
-									<NavLink to="/private/heroes">Ver personajes</NavLink>
+									<NavLink to="/private/heroes">Ver heroes</NavLink>
 								</li>
 								<li>
-									<NavLink to="/private/heroes/search ">Buscar personajes</NavLink>
+									<NavLink to="/private/heroes/search">Buscar heroes</NavLink>
 								</li>
 								<li>
 									<Form>
