@@ -1,4 +1,4 @@
-import type { ActionArgs, LoaderArgs } from '@remix-run/node'
+import type { ActionArgs, LoaderArgs, MetaFunction } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Form, useActionData, useTransition } from '@remix-run/react'
@@ -22,6 +22,7 @@ interface Field extends InputHTMLAttributes<HTMLInputElement> {
 export const signInValidator = z.object({
 	username: z.string().min(5, { message: 'Campo requerido' }),
 	password: z.string().min(5, { message: 'Campo requerido' }),
+	comics: z.string().endsWith('Comics', { message: 'Campo requerido' }),
 })
 
 const LoginDomainFunction = makeDomainFunction(signInValidator)(
@@ -31,14 +32,18 @@ const LoginDomainFunction = makeDomainFunction(signInValidator)(
 )
 export const action = async ({ request }: ActionArgs) => {
 	const result = await LoginDomainFunction(await inputFromForm(request))
-	if (result.success) return createUserSession(v4())
+	if (result.success) return createUserSession(v4(), result.data.comics)
 	const inputErrors = errorMessagesForSchema(result.inputErrors, signInValidator)
-	return json({
-		errors: result.errors,
-		username: inputErrors.username,
-		password: inputErrors.password,
-	})
+	return json(
+		{
+			username: inputErrors.username,
+			password: inputErrors.password,
+			comics: inputErrors.comics,
+		},
+		{ status: result.success ? 200 : 400 }
+	)
 }
+export const meta: MetaFunction = () => ({ title: 'Herox - Iniciar sesión' })
 export const loader = async ({ request }: LoaderArgs) => {
 	const session = await getSession(request)
 
@@ -47,15 +52,15 @@ export const loader = async ({ request }: LoaderArgs) => {
 }
 export const FormField = ({ label, name, type, errors, ...rest }: Field) => {
 	return (
-		<aside className="w-full max-w-xs form-control">
-			<label className="label label-text">{label}</label>
+		<aside className="w-full max-w-xs space-y-0 form-control">
+			<label className="font-bold label label-text">{label}</label>
 			<input
 				type={type}
 				name={name}
 				className="w-full max-w-xs input input-bordered input-primary"
 				{...rest}
 			/>
-			<span className="h-12 text-red-500 " data-test="input-errors">
+			<span className="text-red-500 h-9 " data-test="input-errors">
 				{errors && errors}
 			</span>
 		</aside>
@@ -67,7 +72,7 @@ export default function LoginPage() {
 	const actionData = useActionData<typeof action>()
 	const transition = useTransition()
 	const isSubmitting = transition.state === 'submitting'
-
+	console.log(actionData)
 	useEffect(() => {
 		formRef.current?.reset()
 	}, [isSubmitting])
@@ -84,24 +89,39 @@ export default function LoginPage() {
 				</div>
 
 				<div className="flex-shrink-0 w-full max-w-sm shadow-2xl card bg-base-100">
-					<Form method="post" className="card-body">
+					<Form method="post" className="grid card-body place-items-center">
 						<FormField
 							label="Nombre de usuario"
 							name="username"
 							type="text"
-							errors={actionData?.username[0]}
+							errors={actionData && actionData.username && actionData?.username[0]}
 							data-test="username-input"
 						/>
 						<FormField
 							label="Contraseña"
 							name="password"
-							type="text"
-							errors={actionData?.password[0]}
+							type="password"
+							errors={actionData && actionData.password && actionData?.password[0]}
 							data-test="password-input"
 						/>
+						<aside className="w-full max-w-xs form-control">
+							<label htmlFor="comics" className="font-bold label label-text">
+								Comic Favorito
+							</label>
+							<select className="w-full select select-secondary" name="comics">
+								<option defaultValue="Seleccione su comic favorito">
+									Seleccione su comic favorito
+								</option>
+								<option>Marvel Comics</option>
+								<option>DC Comics</option>
+							</select>
+							<span className="h-6 text-red-500 " data-test="input-errors">
+								{actionData && actionData.comics && actionData.comics}
+							</span>
+						</aside>
 						<button
 							type="submit"
-							className="btn btn-secondary "
+							className="btn btn-primary "
 							disabled={isSubmitting}
 							name="submit-login"
 						>

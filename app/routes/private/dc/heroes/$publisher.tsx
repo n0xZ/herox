@@ -1,14 +1,14 @@
 import type { LoaderArgs, MetaFunction } from '@remix-run/node'
 import { useLoaderData, useParams } from '@remix-run/react'
 import { HeroListResult } from '~/components/hero/HeroResult'
-import { getHeroByPublisher } from '~/services/heroes.server'
+import { getHeroesByPublisher } from '~/services/heroes.server'
 
 const parseParams = (params?: string) => params?.replace('_', ' ')
 export const meta: MetaFunction = ({ params }) => ({
 	title: `Herox: ${parseParams(params.publisher)}`,
 })
 export const loader = async ({ params }: LoaderArgs) => {
-	return getHeroByPublisher(params.publisher)
+	return getHeroesByPublisher(params.publisher)
 }
 
 export default function PublisherContent() {

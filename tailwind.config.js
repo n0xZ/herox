@@ -9,7 +9,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				inter: ['Inter', 'sans-serif'],
-				anton: ['Anton', 'sans-serif'],
+				ubuntu: ['Ubuntu Condensed', 'sans-serif'],
 			},
 		},
 	},

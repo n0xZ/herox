@@ -20,13 +20,13 @@ export const links: LinksFunction = () => [
 	{ rel: 'stylesheet', href: styles },
 	{
 		rel: 'stylesheet',
-		href: 'https://fonts.bunny.net/css?family=anton:400|inter:300',
+		href: 'https://fonts.bunny.net/css?family=inter:400|ubuntu-condensed:400"',
 	},
 ]
 
 export default function App() {
 	return (
-		<html lang="en" data-theme="emerald">
+		<html lang="en" data-theme="light">
 			<head>
 				<Meta />
 				<Links />

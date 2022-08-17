@@ -3,8 +3,9 @@ import React from 'react'
 import type { Hero } from '~/types'
 type HeroItemProps = {
 	hero: Hero
+	publisher: string
 }
-export default function HeroItem({ hero }: HeroItemProps) {
+export default function HeroItem({ hero, publisher }: HeroItemProps) {
 	return (
 		<article className="shadow-xl card w-96 bg-base-100 hover:opacity-80">
 			<figure className="px-10 pt-10">
@@ -28,7 +29,10 @@ export default function HeroItem({ hero }: HeroItemProps) {
 					{hero.biography.alignment.toUpperCase()}
 				</p>
 				<div className="flex flex-col card-actions">
-					<Link to={`/characters/${hero.id}`} className="btn btn-primary w-44">
+					<Link
+						to={`/private/${publisher}/heroes/${hero.id}`}
+						className="btn btn-primary w-44"
+					>
 						Ver personaje
 					</Link>
 					<button className="btn btn-secondary w-44">Agregar a mi equipo</button>
