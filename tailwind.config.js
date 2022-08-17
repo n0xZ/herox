@@ -6,7 +6,12 @@ module.exports = {
 		'./app/routes/*/**.tsx',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				inter: ['Inter', 'sans-serif'],
+				anton: ['Anton', 'sans-serif'],
+			},
+		},
 	},
 	plugins: [require('daisyui')],
 }

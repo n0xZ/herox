@@ -55,7 +55,9 @@ export const FormField = ({ label, name, type, errors, ...rest }: Field) => {
 				className="w-full max-w-xs input input-bordered input-primary"
 				{...rest}
 			/>
-			<span className="h-12 text-red-500 ">{errors && errors}</span>
+			<span className="h-12 text-red-500 " data-test="input-errors">
+				{errors && errors}
+			</span>
 		</aside>
 	)
 }
@@ -88,17 +90,20 @@ export default function LoginPage() {
 							name="username"
 							type="text"
 							errors={actionData?.username[0]}
+							data-test="username-input"
 						/>
 						<FormField
 							label="Contraseña"
 							name="password"
 							type="text"
 							errors={actionData?.password[0]}
+							data-test="password-input"
 						/>
 						<button
 							type="submit"
 							className="btn btn-secondary "
 							disabled={isSubmitting}
+							name="submit-login"
 						>
 							{!isSubmitting ? 'Iniciar sesión' : 'Iniciando...'}
 						</button>
