@@ -38,7 +38,7 @@ export const HeroItemResult = ({ hero }: HeroItemProps) => {
 
 export const HeroListResult = ({ heroes }: { heroes: Hero[] }) => {
 	return (
-		<section className="grid grid-cols-1 gap-3 mb-3 xl:grid-cols-3 place-items-center">
+		<section className="grid grid-cols-1 gap-3 mb-3  xl:grid-cols-3 place-items-center">
 			{heroes.map((hero) => (
 				<HeroItemResult hero={hero} key={hero.id} />
 			))}

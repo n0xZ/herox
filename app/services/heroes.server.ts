@@ -29,7 +29,7 @@ export const getHeroesByPublisher = async (publisher?: string) => {
 	const heroes = await getHeroes()
 	const heroesByPublisher = heroes.filter(
 		(hero) =>
-			hero.biography.publisher?.replace('', '-').toLowerCase() === publisher
+			hero.biography.publisher?.replace('', '-').toLowerCase() !== publisher
 	)
 	return heroesByPublisher
 }

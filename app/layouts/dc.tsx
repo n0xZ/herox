@@ -1,7 +1,6 @@
 import { Form, NavLink } from '@remix-run/react'
 import type { ReactNode } from 'react'
 
-
 export default function DCLayout({ children }: { children: ReactNode }) {
 	return (
 		<>
@@ -36,10 +35,15 @@ export default function DCLayout({ children }: { children: ReactNode }) {
 								</span>
 								<ul className="p-2 text-lg bg-black w-72">
 									<li>
-										<NavLink to="/private/dc/heroes">Ver heroes</NavLink>
+										<NavLink to="/private/dc/heroes">Ver heroes de DC</NavLink>
 									</li>
 									<li>
 										<NavLink to="/private/dc/heroes/search">Buscar heroes</NavLink>
+									</li>
+									<li>
+										<NavLink to="/public/search-by-publisher">
+											Buscar heroes por publisher
+										</NavLink>
 									</li>
 									<li>
 										<Form method="post">
@@ -75,10 +79,15 @@ export default function DCLayout({ children }: { children: ReactNode }) {
 								className="p-2 mt-3 space-y-2 bg-black shadow menu menu-compact dropdown-content rounded-box "
 							>
 								<li>
-									<NavLink to="/private/dc/heroes">Ver heroes</NavLink>
+									<NavLink to="/private/dc/heroes">Ver heroes de DC</NavLink>
 								</li>
 								<li>
 									<NavLink to="/private/dc/heroes/search">Buscar heroes</NavLink>
+								</li>
+								<li>
+									<NavLink to="/public/search-by-publisher">
+										Buscar heroes por publisher
+									</NavLink>
 								</li>
 								<li>
 									<Form method="post">

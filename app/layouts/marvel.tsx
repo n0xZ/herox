@@ -44,6 +44,11 @@ export default function MarvelLayout({ children }: { children: ReactNode }) {
 										<NavLink to="/private/marvel/heroes/search">Buscar heroes</NavLink>
 									</li>
 									<li>
+										<NavLink to="/public/search-by-publisher">
+											Buscar heroes por publisher
+										</NavLink>
+									</li>
+									<li>
 										<Form method="post">
 											<button type="submit" name="_logout" value="true">
 												Cerrar sesión
@@ -81,6 +86,11 @@ export default function MarvelLayout({ children }: { children: ReactNode }) {
 								</li>
 								<li>
 									<NavLink to="/private/marvel/heroes/search">Buscar heroes</NavLink>
+								</li>
+								<li>
+									<NavLink to="/public/search-by-publisher">
+										Buscar heroes por publisher
+									</NavLink>
 								</li>
 								<li>
 									<Form method="post">
