@@ -6,7 +6,7 @@ import { getDCHeroes } from '~/services/heroes.server'
 import { HeroList } from '~/components/hero/HeroList'
 
 export const meta: MetaFunction = () => ({
-	title: 'Herox - Lista de superheroes',
+	title: 'Herox/DC - Lista de superheroes',
 })
 
 export const loader = async () => {
@@ -20,7 +20,7 @@ export default function HeroListPage() {
 	return (
 		<>
 			<h2 className="mt-8 mb-4 text-4xl font-bold text-center">
-				Bienvenido a DC Comics.
+				Heroes del universo DC:
 			</h2>
 
 			{loaderData && (

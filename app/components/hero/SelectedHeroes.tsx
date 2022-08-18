@@ -1,13 +1,15 @@
 import { Link } from '@remix-run/react'
 import { useSelectedHeroes } from '~/hooks/useSelectedHeroes'
-
 import type { Hero } from '~/types'
-type HeroItemProps = {
+
+const SelectedHero = ({
+	hero,
+	publisher,
+}: {
 	hero: Hero
 	publisher: string
-}
-export default function HeroItem({ hero, publisher }: HeroItemProps) {
-	const { addHeroToLocalStorage } = useSelectedHeroes()
+}) => {
+	const { removeHeroFromLocalStorage } = useSelectedHeroes()
 	return (
 		<article className="duration-100 ease-in shadow-xl card w-80 bg-base-100 hover:-translate-y-1">
 			<figure className="px-10 pt-10">
@@ -41,12 +43,27 @@ export default function HeroItem({ hero, publisher }: HeroItemProps) {
 						className={`btn ${
 							publisher === 'marvel' ? 'btn-error' : 'btn-secondary'
 						} w-44`}
-						onClick={() => addHeroToLocalStorage(hero)}
+						onClick={() => removeHeroFromLocalStorage(hero)}
 					>
-						Agregar a mi equipo
+						Eliminar de mi equipo
 					</button>
 				</div>
 			</aside>
 		</article>
+	)
+}
+export default function SelectedHeroes({
+	heroes,
+	publisher,
+}: {
+	heroes: Hero[]
+	publisher: string
+}) {
+	return (
+		<section className="grid grid-cols-1 gap-3 mb-3 xl:grid-cols-3 place-items-center">
+			{heroes.map((hero) => (
+				<SelectedHero hero={hero} key={hero.id} publisher={publisher} />
+			))}
+		</section>
 	)
 }

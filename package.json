@@ -20,6 +20,7 @@
 		"@vercel/node": "^2.4.4",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-hot-toast": "^2.3.0",
 		"remix-domains": "^0.3.2",
 		"zod": "^3.18.0"
 	},

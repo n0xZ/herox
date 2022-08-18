@@ -57,7 +57,7 @@ export const FormField = ({ label, name, type, errors, ...rest }: Field) => {
 			<input
 				type={type}
 				name={name}
-				className="w-full max-w-xs input input-bordered input-primary"
+				className="w-full max-w-xs input input-bordered "
 				{...rest}
 			/>
 			<span className="text-red-500 h-9 " data-test="input-errors">
@@ -80,10 +80,10 @@ export default function LoginPage() {
 		<section className="min-h-screen hero bg-base-200">
 			<article className="flex-col hero-content lg:flex-row-reverse">
 				<div className="text-center lg:text-left">
-					<h1 className="text-4xl font-bold">
+					<h1 className="text-4xl font-bold text-center">
 						Busca tus heroes favoritos de Marvel y DC!
 					</h1>
-					<p className="py-6">
+					<p className="py-6 text-center">
 						En herox, puedes encontrar a tus heroes favoritos del mundo de los comics.
 					</p>
 				</div>
@@ -108,7 +108,7 @@ export default function LoginPage() {
 							<label htmlFor="comics" className="font-bold label label-text">
 								Comic Favorito
 							</label>
-							<select className="w-full select select-secondary" name="comics">
+							<select className="w-full select select-primary" name="comics">
 								<option defaultValue="Seleccione su comic favorito">
 									Seleccione su comic favorito
 								</option>

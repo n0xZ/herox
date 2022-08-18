@@ -38,18 +38,18 @@ export default function MarvelLayout({ children }: { children: ReactNode }) {
 								</span>
 								<ul className="p-2 bg-red-500">
 									<li>
-										<NavLink to="/private/heroes">Ver heroes</NavLink>
+										<NavLink to="/private/marvel/heroes">Ver heroes</NavLink>
 									</li>
 									<li>
-										<NavLink to="/private/heroes/search">Buscar heroes</NavLink>
+										<NavLink to="/private/marvel/heroes/search">Buscar heroes</NavLink>
 									</li>
-											<li>
-									<Form method="post">
-										<button type="submit" name="_logout" value="true">
-											Cerrar sesión
-										</button>
-									</Form>
-								</li>
+									<li>
+										<Form method="post">
+											<button type="submit" name="_logout" value="true">
+												Cerrar sesión
+											</button>
+										</Form>
+									</li>
 								</ul>
 							</li>
 						</ul>
@@ -94,7 +94,7 @@ export default function MarvelLayout({ children }: { children: ReactNode }) {
 					</aside>
 				</nav>
 			</header>
-			<main className="min-h-screen bg-red-500 font-lato">{children}</main>
+			<main className="min-h-screen ">{children}</main>
 		</>
 	)
 }

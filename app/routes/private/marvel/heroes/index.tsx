@@ -6,7 +6,7 @@ import { getMarvelHeroes } from '~/services/heroes.server'
 import { HeroList } from '~/components/hero/HeroList'
 
 export const meta: MetaFunction = () => ({
-	title: 'Herox - Lista de superheroes',
+	title: 'Herox/Marvel - Lista de superheroes',
 })
 
 export const loader = async () => {
@@ -20,7 +20,7 @@ export default function HeroListPage() {
 	const { heroContainer, heroesPaginated } = usePagination(loaderData)
 	return (
 		<>
-			<h2 className="mt-6 text-4xl font-bold text-center ">
+			<h2 className="mt-6 text-4xl font-bold text-center font-inter ">
 				Lista de personajes:
 			</h2>
 

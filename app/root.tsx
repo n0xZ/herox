@@ -7,7 +7,8 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from '@remix-run/react'
-
+import { useEffect, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 import styles from '~/styles/app.css'
 
 export const meta: MetaFunction = () => ({
@@ -25,15 +26,21 @@ export const links: LinksFunction = () => [
 ]
 
 export default function App() {
+	const [IsMounted, setIsMounted] = useState(false)
+	useEffect(() => {
+		const handleMount = () => setIsMounted(true)
+		handleMount()
+	}, [])
+
 	return (
-		<html lang="en" data-theme="light">
+		<html lang="en" data-theme="autumn">
 			<head>
 				<Meta />
 				<Links />
 			</head>
-			<body className='font-inter'>
+			<body className="font-inter">
 				<Outlet />
-
+				{IsMounted && <Toaster />}
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />

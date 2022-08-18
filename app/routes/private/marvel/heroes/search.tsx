@@ -1,22 +1,25 @@
-import type { LoaderArgs } from '@remix-run/node'
+import type { LoaderArgs, MetaFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Form, useFetcher, useLoaderData } from '@remix-run/react'
-import {useParams} from '@remix-run/react'
-import { HeroListResult } from '~/components/hero/HeroResult'
-import { FormField } from '~/routes/login'
-import { getHeroes } from '~/services/heroes.server'
-import type { Hero } from '~/types'
+import { useFetcher } from '@remix-run/react'
 
+import { FormField } from '~/routes/login'
+import { getMarvelHeroes } from '~/services/heroes.server'
+import { HeroListResult } from '~/components/hero/HeroResult'
+import type { Hero } from '~/types'
+export const meta: MetaFunction = () => ({
+	title: `Herox/Marvel - Buscar héroe`,
+})
 export const loader = async ({ request }: LoaderArgs) => {
 	const url = new URL(request.url)
 	const params = url.searchParams.get('name' ?? '')
-	const heroes = await getHeroes()
-	const filteredHeroesByName = heroes.filter((hero) => hero.name === params)
+	const heroes = await getMarvelHeroes()
+
+	const filteredHeroesByName = heroes.filter((hero) =>
+		hero.name.toLowerCase().includes(params?.toLowerCase()!)
+	)
 
 	return json({ heroes: filteredHeroesByName })
 }
-
-
 
 export default function SearchHeroes() {
 	const fetcher = useFetcher<{ heroes: Hero[] }>()
@@ -34,18 +37,16 @@ export default function SearchHeroes() {
 					type="text"
 					disabled={isSubmitting}
 				/>
-				<button
-					type="submit"
-					className="w-32 btn btn-primary"
-					disabled={isSubmitting}
-				>
+				<button type="submit" className="w-32 btn " disabled={isSubmitting}>
 					{isSubmitting ? 'Buscando...' : 'Buscar heroe'}
 				</button>
-				{fetcher.data && fetcher.data.heroes.length !== 0 ? (
-					<HeroListResult heroes={fetcher.data?.heroes} />
-				) : (
-					<div>No se han encontrado resultados 😢 </div>
-				)}
+				{fetcher.data ? (
+					fetcher.data?.heroes.length !== 0 ? (
+						<HeroListResult heroes={fetcher.data?.heroes} />
+					) : (
+						<div>No se han encontrado resultados 😥</div>
+					)
+				) : null}
 			</fetcher.Form>
 		</>
 	)

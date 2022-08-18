@@ -22,7 +22,7 @@ export default function DCLayout({ children }: { children: ReactNode }) {
 					<aside className="hidden space-x-4 navbar-end xl:flex">
 						<ul className="p-0 space-x-3 menu menu-horizontal">
 							<li tabIndex={0}>
-								<span className='text-lg'>
+								<span className="text-lg">
 									Heroes
 									<svg
 										className="fill-current"
@@ -72,7 +72,7 @@ export default function DCLayout({ children }: { children: ReactNode }) {
 							</label>
 							<ul
 								tabIndex={0}
-								className="p-2 mt-3 space-y-2 bg-black shadow menu menu-compact dropdown-content rounded-box w-52 "
+								className="p-2 mt-3 space-y-2 bg-black shadow menu menu-compact dropdown-content rounded-box "
 							>
 								<li>
 									<NavLink to="/private/dc/heroes">Ver heroes</NavLink>
