@@ -20,4 +20,4 @@ Herox utiliza el siguiente stack:
 - [Typescript](https://www.typescriptlang.org/)
 - [Zod](https://github.com/colinhacks/zod)
 - [TailwindCSS](https://tailwindcss.com/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
+- [Vercel](https://vercel.com/)
