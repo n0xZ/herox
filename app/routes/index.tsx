@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react'
 
 import MarvelLandingAsset from '../../public/marvel.landing.webp'
-import DCLandingAsset from '../../public/dc.landing.webp'
+
 export default function Landing() {
 	return (
 		<main className="h-full min-h-screen text-zinc-900 font-lato">

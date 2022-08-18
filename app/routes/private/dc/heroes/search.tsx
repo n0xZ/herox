@@ -18,7 +18,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function SearchHeroes() {
 	const fetcher = useFetcher<{ heroes: Hero[] }>()
-	console.log(fetcher.data)
+
 	const isSubmitting = fetcher.state === 'submitting'
 	return (
 		<>

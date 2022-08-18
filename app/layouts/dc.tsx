@@ -1,6 +1,6 @@
 import { Form, NavLink } from '@remix-run/react'
 import type { ReactNode } from 'react'
-import DCLogo from '../../public/dc-logo.svg'
+
 
 export default function DCLayout({ children }: { children: ReactNode }) {
 	return (

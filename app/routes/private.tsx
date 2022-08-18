@@ -1,5 +1,5 @@
 import type { ActionArgs, LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
+
 import { Outlet, useLoaderData } from '@remix-run/react'
 
 import DCLayout from '~/layouts/dc'

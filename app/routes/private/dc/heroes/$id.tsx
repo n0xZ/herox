@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => ({
 export const loader = async ({ params }: LoaderArgs) => {
 	const heroes = await getDCHeroes()
 	const heroById = heroes.find((hero) => hero.id === Number(params?.id))
-	console.log(heroById)
+
 	return heroById
 }
 
