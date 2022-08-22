@@ -4,7 +4,7 @@ import MarvelLandingAsset from '../../public/marvel.landing.webp'
 
 export default function Landing() {
 	return (
-		<main className="h-full min-h-screen text-zinc-900 font-lato">
+		<main className="grid h-full min-h-screen text-zinc-900 place-items-center font-lato">
 			<section className="h-full mb-4 hero">
 				<article className="flex-col hero-content lg:flex-row">
 					<img
