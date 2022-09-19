@@ -4,7 +4,7 @@ const sessionSecret = process.env.SESSION_SECRET!
 
 const storage = createCookieSessionStorage({
 	cookie: {
-		name: 'USER_SESSION',
+		name: 'fb:token',
 		secure: process.env.NODE_ENV === 'production',
 		secrets: [sessionSecret],
 		sameSite: 'lax',

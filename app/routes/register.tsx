@@ -2,7 +2,7 @@ import type { ActionArgs, LoaderArgs, MetaFunction } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Form, Link, useActionData, useTransition } from '@remix-run/react'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import type { InputHTMLAttributes } from 'react'
 import {
 	makeDomainFunction,
@@ -21,7 +21,7 @@ interface Field extends InputHTMLAttributes<HTMLInputElement> {
 	name: string
 	errors?: string
 }
-export const signInValidator = z.object({
+export const signUpValidator = z.object({
 	email: z
 		.string()
 		.min(5, { message: 'Campo requerido' })
@@ -30,21 +30,20 @@ export const signInValidator = z.object({
 	comics: z.string().endsWith('Comics', { message: 'Campo requerido' }),
 })
 
-const LoginDomainFunction = makeDomainFunction(signInValidator)(
+const registerDomainFunction = makeDomainFunction(signUpValidator)(
 	async ({ password, email, comics }) => {
-		const { user } = await signInWithEmailAndPassword(auth, email, password)
+		const { user } = await createUserWithEmailAndPassword(auth, email, password)
 
 		return { user, comics }
 	}
 )
 export const action = async ({ request }: ActionArgs) => {
-	const result = await LoginDomainFunction(await inputFromForm(request))
+	const result = await registerDomainFunction(await inputFromForm(request))
 
 	if (result.success) return createUserSession(v4(), result.data.comics)
 
-	const inputErrors = errorMessagesForSchema(result.inputErrors, signInValidator)
-	const externalErrors =
-		result.errors.length !== 0 ? result.errors[0].message : undefined
+	const inputErrors = errorMessagesForSchema(result.inputErrors, signUpValidator)
+	const externalErrors = result.errors.length !== 0 ? result.errors[0].message : undefined
 	return json(
 		{
 			email: inputErrors.email,
@@ -55,7 +54,9 @@ export const action = async ({ request }: ActionArgs) => {
 		{ status: result.success ? 200 : 400 }
 	)
 }
-export const meta: MetaFunction = () => ({ title: 'Herox - Iniciar sesión' })
+export const meta: MetaFunction = () => ({
+	title: 'Herox - Crea tu nueva cuenta!',
+})
 export const loader = async ({ request }: LoaderArgs) => {
 	const session = await getSession(request)
 
@@ -79,7 +80,7 @@ export const FormField = ({ label, name, type, errors, ...rest }: Field) => {
 	)
 }
 
-export default function LoginPage() {
+export default function RegisterPage() {
 	const actionData = useActionData<typeof action>()
 	const transition = useTransition()
 	const isSubmitting = transition.state === 'submitting'
@@ -137,9 +138,9 @@ export default function LoginPage() {
 							disabled={isSubmitting}
 							name="submit-login"
 						>
-							{!isSubmitting ? 'Iniciar sesión' : 'Iniciando...'}
+							{!isSubmitting ? 'Crear cuenta' : 'Creando nueva cuenta...'}
 						</button>
-						<Link to="/register">No tengo una cuenta</Link>
+						<Link to="/register">Ya tengo una cuenta</Link>
 						<span className="text-red-500 h-9 ">
 							{actionData && actionData.externalErrors && actionData.externalErrors}
 						</span>
