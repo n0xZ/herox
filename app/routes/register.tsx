@@ -140,7 +140,7 @@ export default function RegisterPage() {
 						>
 							{!isSubmitting ? 'Crear cuenta' : 'Creando nueva cuenta...'}
 						</button>
-						<Link to="/register">Ya tengo una cuenta</Link>
+						<Link to="/login">Ya tengo una cuenta</Link>
 						<span className="text-red-500 h-9 ">
 							{actionData && actionData.externalErrors && actionData.externalErrors}
 						</span>
